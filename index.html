@@ -171,30 +171,19 @@
     <li class="light l24"></li>
     <li class="light l25"></li>
   </ul>
-  <audio autoplay="autoplay" loop="loop" controls="controls" id="bgMusic">
+  <audio preload="preload" loop="loop" controls="controls" id="bgMusic">
     <source src="christmas.mp3" type="audio/mp3" />
     <source src="song.ogg" type="audio/ogg" />
   <embed src="christmas.mp3" loop="true" autostart="true" />
   </audio>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-  <script>
-    function autoPlayAudio() {
-         wx.config({
-             // 配置信息, 即使不正确也能使用 wx.ready
-             debug: false,
-             appId: '',
-             timestamp: 1,
-             nonceStr: '',
-             signature: '',
-             jsApiList: []
-         });
-         wx.ready(function() {
-             var globalAudio=document.getElementById("bgMusic");
-             globalAudio.play();
-         });
-     };
- // 解决ios音乐不自动播放的问题
- autoPlayAudio();
- </script>
+  <script> 
+    //一般情况下，这样就可以自动播放了，但是一些奇葩iPhone机不可以 
+    document.getElementById('bgMusic').play(); 
+   //必须在微信Weixin JSAPI的WeixinJSBridgeReady才能生效 
+   document.addEventListener("WeixinJSBridgeReady", function () { 
+       document.getElementById('bgMusic').play(); 
+   }, false); 
+</script> 
 </body>
 </html>
